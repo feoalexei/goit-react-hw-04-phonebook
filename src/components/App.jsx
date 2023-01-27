@@ -9,37 +9,25 @@ import { AppContainer } from './App.styled';
 const CONTACTS_KEY = 'contacts';
 
 export const App = () => {
-  const [contacts, setContacts] = useState([
-    { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-    { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-    { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-    { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-  ]);
+  const [contacts, setContacts] = useState(
+    JSON.parse(localStorage.getItem(CONTACTS_KEY)) || [
+      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
+    ]
+  );
   const [filter, setFilter] = useState('');
 
-  // componentDidMount() {
-  //   const contacts = localStorage.getItem(CONTACTS_KEY);
-  //   const parsedContacts = JSON.parse(contacts);
-
-  //   if (parsedContacts) {
-  //     this.setState({ contacts: parsedContacts });
-  //   }
-  // }
-
+  // Alternative way to load items from Local Storage on start
   // useEffect(() => {
   //   const contacts = localStorage.getItem(CONTACTS_KEY);
   //   const parsedContacts = JSON.parse(contacts);
 
-  //   if (parsedContacts) {
-  //     setContacts({ parsedContacts });
+  //   if (parsedContacts?.length) {
+  //     setContacts(parsedContacts);
   //   }
   // }, []);
-
-  // componentDidUpdate(_, prevState) {
-  //   if (this.state.contacts !== prevState.contacts) {
-  //     localStorage.setItem(CONTACTS_KEY, JSON.stringify(this.state.contacts));
-  //   }
-  // }
 
   useEffect(() => {
     localStorage.setItem(CONTACTS_KEY, JSON.stringify(contacts));
